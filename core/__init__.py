@@ -16,11 +16,11 @@ async def get_gitignore(language: str) -> str:
     Returns:
         str: Git ignore file.
     """
-    url = URL + language
+    url = URL + language.lower()
     async with aiohttp.ClientSession() as session:
-        print(f"Initializing request for {language}...")
+        print(f"Initializing request for {language.capitalize()}...")
         async with session.get(url) as response:
-            print(f"Request for {language} completed.")
+            print(f"Request for {language.capitalize()} completed.")
             return await response.text()
 
 
