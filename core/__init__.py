@@ -18,7 +18,9 @@ async def get_gitignore(language: str) -> str:
     """
     url = URL + language
     async with aiohttp.ClientSession() as session:
+        print(f"Initializing request for {language}...")
         async with session.get(url) as response:
+            print(f"Request for {language} completed.")
             return await response.text()
 
 
