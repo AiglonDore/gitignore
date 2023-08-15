@@ -1,5 +1,4 @@
 import asyncio
-import sys
 import aiohttp
 import async_lru
 
@@ -24,12 +23,12 @@ async def get_gitignore(language: str) -> str:
             return await response.text()
 
 
-async def get_gitignore_list(*args) -> list[str]:
+async def get_gitignore_list(*args: str) -> list[str]:
     """Gets the files associated to the languages.
 
     Returns:
         list[str]: list of files.
     """
     return await asyncio.gather(
-        *[get_gitignore(lang) for lang in (args or sys.argv[1:]) if not lang.startswith("-")]
+        *[get_gitignore(lang) for lang in args if not lang.startswith("-")]
     )

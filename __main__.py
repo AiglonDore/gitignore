@@ -4,13 +4,12 @@ import asyncio
 import sys
 
 
-async def make_git_ignore() -> None:
-    """Builds the file.
-    """
+async def make_git_ignore(*args: str) -> None:
+    """Builds the file."""
     print("Creating .gitignore file...")
 
     try:
-        files = await core.get_gitignore_list()
+        files = await core.get_gitignore_list(*args)
     except Exception as e:
         print(e, file=sys.stderr)
         sys.exit(1)
@@ -19,13 +18,12 @@ async def make_git_ignore() -> None:
     with open(r".gitignore", "w") as f:
         for file in files:
             f.write(file + "\n")
-    
+
     print("Done!")
 
 
-async def main() -> None:
+async def main(*args: str) -> None:
     """Main function."""
-    args = sys.argv[1:]
     if not args or args[0] in ("-h", "--help"):
         help.help()
 
@@ -33,8 +31,8 @@ async def main() -> None:
         print("Python GigIgnore package version ", help.VERSION)
 
     else:
-        await make_git_ignore()
+        await make_git_ignore(*[arg for arg in args if not arg.startswith("-")])
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(main(*(sys.argv[1:])))
