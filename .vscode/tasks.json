@@ -1,0 +1,39 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Create virtual environment",
+            "type": "shell",
+            "command": "python -m venv .venv",
+        },
+        {
+            "label": "Activate virtual environment",
+            "type": "shell",
+            "command": ".venv\\Scripts\\activate.bat",
+            "dependsOn": "Create virtual environment",
+        },
+        {
+            "label": "Upgrade pip",
+            "type": "shell",
+            "command": "python -m pip install --upgrade pip",
+            "dependsOn": "Activate virtual environment",
+        },
+        {
+            "label": "Install dependencies",
+            "type": "shell",
+            "command": "pip install -r requirements.txt",
+            "dependsOn": "Upgrade pip",
+        },
+        {
+            "label": "Main: Build Environment",
+            "dependsOn": [
+                "Install dependencies",
+            ],
+        },
+        {
+            "label": "Run tests",
+            "type": "shell",
+            "command": "pytest",
+        }
+    ]
+}
