@@ -1,4 +1,2 @@
 aiohttp
 async-lru
-pytest
-build
