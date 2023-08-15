@@ -1,2 +1,2 @@
-# gitignore
-Provides an interface to easily create gitignore files
+# Git Ignore
+Provides an interface to easily create `.gitignore` files
