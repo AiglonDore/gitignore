@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="gitignore",
+    name="aiogitignore",
     version="1.0.0",
     description="A simple command line tool to generate .gitignore files",
     author="Aiglon Doré",
