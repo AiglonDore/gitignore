@@ -9,8 +9,16 @@
         {
             "label": "Activate virtual environment",
             "type": "shell",
-            "command": ".venv\\Scripts\\activate.bat",
             "dependsOn": "Create virtual environment",
+            "windows": {
+                "command": ".venv\\Scripts\\activate.bat"
+            },
+            "linux": {
+                "command": "source .venv/bin/activate"
+            },
+            "osx": {
+                "command": "source .venv/bin/activate"
+            }
         },
         {
             "label": "Upgrade pip",
