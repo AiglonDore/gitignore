@@ -1,6 +1,8 @@
 import asyncio
+import sys
 import aiohttp
 import async_lru
+import os
 
 URL = r"https://www.toptal.com/developers/gitignore/api/"
 
@@ -32,3 +34,17 @@ async def get_gitignore_list(*args: str) -> list[str]:
     return await asyncio.gather(
         *[get_gitignore(lang) for lang in args if not lang.startswith("-")]
     )
+
+
+def check_if_file_exists() -> None:
+    """Check if the `.gitignore` file already exists.
+
+    Raises:
+        FileExistsError: if the file exists and will not be overwritten.
+    """
+    if os.path.exists(".gitignore") and (
+        "--overwrite" not in sys.argv or "-o" not in sys.argv
+    ):
+        raise FileExistsError(
+            "File already exists. Use --overwrite or -o to overwrite it."
+        )

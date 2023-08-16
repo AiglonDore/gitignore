@@ -6,20 +6,18 @@ import sys
 
 async def make_git_ignore(*args: str) -> None:
     """Builds the file."""
-    print("Creating .gitignore file...")
-
     try:
+        core.check_if_file_exists()
         files = await core.get_gitignore_list(*args)
+        
+        print("Creating .gitignore file...")
+        with open(r".gitignore", "w") as f:
+            for file in files:
+                f.write(file + "\n")
+
+        print("Done!")
     except Exception as e:
         print(e, file=sys.stderr)
-        sys.exit(1)
-
-    print("Writing .gitignore file...")
-    with open(r".gitignore", "w") as f:
-        for file in files:
-            f.write(file + "\n")
-
-    print("Done!")
 
 
 async def main(*args: str) -> None:
@@ -28,7 +26,7 @@ async def main(*args: str) -> None:
         help.help()
 
     elif args[0] in ("-v", "--version"):
-        print("Python GigIgnore package version ", help.VERSION)
+        print("Python AIOGitIgnore package version ", help.VERSION)
 
     else:
         await make_git_ignore(*[arg for arg in args if not arg.startswith("-")])
