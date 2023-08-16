@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="aiogitignore",
-    version="1.0.1",
+    version="1.1",
     description="A simple command line tool to generate .gitignore files",
     author="Aiglon Doré",
     author_email='aiglondore@outlook.com',
